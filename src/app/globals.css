@@ -1,0 +1,132 @@
+@import "tailwindcss";
+
+/* ─────────────────────────────────────────────────────────────────────
+   App-level CSS constants (layout metrics)
+───────────────────────────────────────────────────────────────────── */
+:root {
+  /* Shell sizing */
+  --app-max-width:  430px;   /* Mobile shell max width — used by #app-root and BottomNav */
+  --topbar-h:       57px;    /* PageHeader height: py-[14px]×2 + line-height ~29px */
+  --bottomnav-h:    72px;    /* BottomNav height including safe-area padding */
+
+  /* Hero overlap — ActionsCard pulls up by this amount over HeroCard */
+  --hero-overlap:   62px;
+
+  /* ── Color tokens (mirrors prototype useTheme() light mode) ── */
+  --bg:              #f4f5f7;
+  --surface:         #ffffff;
+  --surface-alt:     #fafbfc;
+  --border:          #eceef1;
+  --border-strong:   #dfe2e7;
+  --text:            #0e1420;
+  --text-dim:        #5b6579;
+  --text-faint:      #8b93a4;
+
+  /* Teal accent (#0f766e) */
+  --accent:          #0f766e;
+  --accent-soft:     #ccfbf1;
+  --accent-text:     #134e4a;
+
+  /* Semantic */
+  --success:         #16a34a;
+  --success-soft:    #dcfce7;
+  --warn:            #d97706;
+  --warn-soft:       #fef3c7;
+  --danger:          #dc2626;
+  --danger-soft:     #fee2e2;
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   Tailwind v4 @theme — maps CSS vars → utility classes
+   e.g. --color-accent  →  text-accent, bg-accent, border-accent
+───────────────────────────────────────────────────────────────────── */
+@theme inline {
+  --font-sans: var(--font-plus-jakarta-sans), system-ui, sans-serif;
+
+  /* Layout */
+  --color-background:       var(--bg);
+  --color-surface:          var(--surface);
+  --color-surface-alt:      var(--surface-alt);
+
+  /* Text */
+  --color-foreground:       var(--text);
+  --color-text-dim:         var(--text-dim);
+  --color-text-faint:       var(--text-faint);
+
+  /* Border */
+  --color-border:           var(--border);
+  --color-border-strong:    var(--border-strong);
+
+  /* Accent */
+  --color-accent:           var(--accent);
+  --color-accent-soft:      var(--accent-soft);
+  --color-accent-text:      var(--accent-text);
+
+  /* Semantic */
+  --color-success:          var(--success);
+  --color-success-soft:     var(--success-soft);
+  --color-warn:             var(--warn);
+  --color-warn-soft:        var(--warn-soft);
+  --color-danger:           var(--danger);
+  --color-danger-soft:      var(--danger-soft);
+
+  /* Shadcn aliases */
+  --color-primary:              var(--accent);
+  --color-primary-foreground:   oklch(1 0 0);
+  --color-card:                 var(--surface);
+  --color-card-foreground:      var(--text);
+  --color-muted:                var(--surface-alt);
+  --color-muted-foreground:     var(--text-dim);
+  --color-secondary:            var(--accent-soft);
+  --color-secondary-foreground: var(--accent-text);
+  --color-destructive:          var(--danger);
+  --color-input:                var(--border);
+  --color-ring:                 var(--accent);
+  --color-popover:              var(--surface);
+  --color-popover-foreground:   var(--text);
+
+  /* Radii — matching prototype */
+  --radius-sm:  6px;
+  --radius-md:  10px;   /* rounded-md */
+  --radius-lg:  12px;   /* rounded-lg */
+  --radius-xl:  16px;   /* rounded-xl → AppCard */
+  --radius-2xl: 18px;   /* rounded-2xl */
+  --radius-3xl: 22px;   /* rounded-3xl */
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   Base reset
+───────────────────────────────────────────────────────────────────── */
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html {
+    height: 100%;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    height: 100%;
+    margin: 0;
+    background: #e8eaed;
+    color: var(--text);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  input, textarea, button, select { font-family: inherit; }
+  button { cursor: pointer; }
+  ::-webkit-scrollbar { width: 0; height: 0; }
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   App shell
+───────────────────────────────────────────────────────────────────── */
+#app-root {
+  position: relative;
+  max-width: var(--app-max-width);
+  min-height: 100dvh;
+  margin: 0 auto;
+  background: var(--bg);
+  box-shadow: 0 0 0 1px rgba(0,0,0,.06), 0 8px 48px rgba(0,0,0,.14);
+}
